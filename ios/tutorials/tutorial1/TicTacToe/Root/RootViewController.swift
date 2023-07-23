@@ -25,6 +25,7 @@ protocol RootPresentableListener: AnyObject {
 }
 
 final class RootViewController: UIViewController, RootPresentable, RootViewControllable {
+    
 
     weak var listener: RootPresentableListener?
 
@@ -47,4 +48,13 @@ final class RootViewController: UIViewController, RootPresentable, RootViewContr
     func present(viewController: ViewControllable) {
         present(viewController.uiviewController, animated: true, completion: nil)
     }
+    
+    func dismiss(viewController: RIBs.ViewControllable) {
+        if presentedViewController == viewController.uiviewController {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+
 }
+
+extension RootViewController: LoggedInViewControllable {}
